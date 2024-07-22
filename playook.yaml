@@ -1,0 +1,18 @@
+- name: Install and Start Apache 
+  hosts: 127.0.0.1
+  connection: local
+  become: yes # Use sudo 
+  tasks:
+  - name: Install Apache
+    apt:
+      name: apache2
+      state: present
+  - name: Start Apache
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+  - name: Create index.html
+    copy:
+      content: "Hello from Ansible"
+      dest: /var/www/html/index.html
